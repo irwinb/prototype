@@ -8,7 +8,7 @@ import com.badlogic.gdx.physics.box2d.BodyDef.BodyType;
 import com.badlogic.gdx.physics.box2d.PolygonShape;
 import com.badlogic.gdx.physics.box2d.World;
 
-public abstract class Entity {
+public class Entity {
 	
 	public static final int ENTITY_DEFAULT_HP = 100;
 
@@ -71,5 +71,7 @@ public abstract class Entity {
 		
 	}
 	
-	public abstract void render( float delta );
+	public void render( float delta ) {
+		
+	}
 }

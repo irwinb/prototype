@@ -7,6 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
+import com.badlogic.gdx.utils.Array;
+import com.onebitpixel.shooter.entity.Entity;
 
 public class GameScreen implements Screen {
 	
@@ -26,11 +28,18 @@ public class GameScreen implements Screen {
 	
 	private SpriteBatch batch;
 	
+	private Array< Entity > entities;
+	
+	private Entity player;
+	
 	public GameScreen() {
 		BodyDef bodyDef = new BodyDef();
 		mouseBody = world.createBody(bodyDef);
-
 		batch = new SpriteBatch();
+		entities = new Array< Entity >();
+	}
+	
+	private void createPlayer() {
 	}
 	
 	@Override
