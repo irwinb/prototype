@@ -13,7 +13,7 @@ public class Entity {
 	public static final int ENTITY_DEFAULT_HP = 100;
 
 	// Physics body.
-	private Body body;
+	public Body body;
 	
 	// Hit-points in game.
 	private int hp;

@@ -1,5 +1,6 @@
 package com.onebitpixel.shooter.Screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.physics.box2d.joints.MouseJoint;
 import com.badlogic.gdx.utils.Array;
 import com.onebitpixel.shooter.entity.Entity;
+import com.onebitpixel.shooter.entity.Player;
 
 public class GameScreen implements Screen {
 	
@@ -37,9 +39,17 @@ public class GameScreen implements Screen {
 		mouseBody = world.createBody(bodyDef);
 		batch = new SpriteBatch();
 		entities = new Array< Entity >();
+		
+		createPlayer();
 	}
 	
 	private void createPlayer() {
+		player = new Player(
+				world,
+				new Vector2( Gdx.graphics.getWidth() * 0.5f, Gdx.graphics.getHeight() * 0.5f ),
+				new Vector2( 1.0f, 1.0f ) );
+		
+		entities.add( player );
 	}
 	
 	@Override
@@ -61,6 +71,10 @@ public class GameScreen implements Screen {
 	}
 	
 	private void update(float delta) {
+		for ( Entity entity : entities ) {
+			entity.update( delta );
+		}
+		
 		world.step(delta, VELOCITY_ITERATIONS, POSITION_ITERATIONS);
 	}
 
@@ -70,6 +84,10 @@ public class GameScreen implements Screen {
 		
 		camera.update();
 		renderer.render(world, camera.combined);
+
+		for ( Entity entity : entities ) {
+			entity.render( delta );
+		}
 	}
 
 	@Override
@@ -79,8 +97,6 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void resume() {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
